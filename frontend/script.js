@@ -1,6 +1,6 @@
 // ScorePredict frontend behaviour.
 // The API URL is local for development. Change it to your deployed API URL before publishing.
-const API_URL = "http://127.0.0.1:8000/predict";
+const API_URL = "https://scorepredict-api.onrender.com/predict";
 
 const form = document.getElementById("prediction-form");
 const predictButton = document.getElementById("predict-button");

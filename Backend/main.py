@@ -10,7 +10,10 @@ model = joblib.load("student_exam_score_model.pkl")
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://127.0.0.1:5500"],
+    allow_origins=[
+    "http://127.0.0.1:5500",
+    "https://student-exam-score-predictor-fronte.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
