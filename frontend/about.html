@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn how the ScorePredict student exam score prediction project works.">
+  <title>About | ScorePredict</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="ScorePredict home">
+      <span class="brand-mark">S</span>
+      <span>Score<span class="brand-accent">Predict</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link active" href="about.html">About</a>
+      <!-- Replace # with your actual profile URLs before publishing. -->
+      <a class="nav-link" href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="nav-link" href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </nav>
+  </header>
+
+  <main class="about-main">
+    <section class="about-hero section-wrap">
+      <span class="eyebrow"><span class="eyebrow-dot"></span> BEHIND SCOREPREDICT</span>
+      <h1>A closer look at<br><span>what powers the prediction.</span></h1>
+      <p>ScorePredict is an end-to-end machine-learning project that estimates a student's exam score from academic and lifestyle-related inputs.</p>
+    </section>
+
+    <section class="about-content section-wrap">
+      <article class="info-panel">
+        <span class="eyebrow">01 / THE IDEA</span>
+        <h2>Project overview</h2>
+        <p>The goal is to explore how factors such as study time, attendance, sleep, study method and learning environment relate to exam performance. A trained regression model uses the submitted details to produce an estimated score.</p>
+        <div class="stat-row">
+          <div class="stat"><strong>16,000</strong><span>dataset records</span></div>
+          <div class="stat"><strong>9</strong><span>input features</span></div>
+          <div class="stat"><strong>100</strong><span>score scale</span></div>
+        </div>
+      </article>
+
+      <article class="info-panel">
+        <span class="eyebrow">02 / INPUT FEATURES</span>
+        <h2>What goes into a prediction?</h2>
+        <p>The model receives nine features describing a student's profile and routine.</p>
+        <div class="feature-list">
+          <span>Age</span><span>Course</span><span>Study hours</span>
+          <span>Class attendance</span><span>Sleep hours</span><span>Sleep quality</span>
+          <span>Study method</span><span>Facility rating</span><span>Exam difficulty</span>
+        </div>
+      </article>
+
+      <article class="info-panel">
+        <span class="eyebrow">03 / DATA PREPARATION</span>
+        <h2>Preprocessing pipeline</h2>
+        <p>The dataset was checked and prepared before training. The identifier column was removed because it is not a meaningful predictor. Numerical and categorical columns are processed differently using a scikit-learn <strong>ColumnTransformer</strong>.</p>
+        <div class="detail-grid">
+          <div><h3>Numerical features</h3><p>Age, study hours, attendance and sleep hours are standardised using StandardScaler.</p></div>
+          <div><h3>Categorical features</h3><p>Ordinal categories are encoded in a defined order, while course and study method use one-hot encoding.</p></div>
+        </div>
+      </article>
+
+      <article class="info-panel">
+        <span class="eyebrow">04 / MODEL SELECTION</span>
+        <h2>Why Linear Regression?</h2>
+        <p>Several regression approaches were explored. The Linear Regression pipeline performed best among the evaluated candidates on the held-out test data, so it was selected for the current version.</p>
+        <div class="metric-grid">
+          <div class="metric"><span>R² score</span><strong>0.7331</strong></div>
+          <div class="metric"><span>MAE</span><strong>7.862</strong></div>
+          <div class="metric"><span>MSE</span><strong>95.4668</strong></div>
+          <div class="metric"><span>RMSE</span><strong>9.7707</strong></div>
+        </div>
+        <p class="small-note">These are the recorded evaluation results for the current model. MAE and RMSE are expressed in score points when the target is measured on a 0–100 scale.</p>
+      </article>
+
+      <article class="info-panel">
+        <span class="eyebrow">05 / HOW IT WORKS</span>
+        <h2>From your browser to a prediction</h2>
+        <div class="architecture" aria-label="Prediction flow">
+          <div class="architecture-step"><span>01</span><strong>Frontend</strong><small>HTML, CSS & JavaScript</small></div>
+          <b aria-hidden="true">→</b>
+          <div class="architecture-step"><span>02</span><strong>FastAPI</strong><small>Receives and validates input</small></div>
+          <b aria-hidden="true">→</b>
+          <div class="architecture-step"><span>03</span><strong>ML pipeline</strong><small>Transforms data and predicts</small></div>
+          <b aria-hidden="true">→</b>
+          <div class="architecture-step"><span>04</span><strong>Result</strong><small>Returns the estimated score</small></div>
+        </div>
+        <p>The browser sends a JSON request to the FastAPI <code>/predict</code> endpoint. Pydantic validates the input, and the saved preprocessing-and-regression pipeline generates a prediction. The API returns the result as JSON for the page to display.</p>
+      </article>
+
+      <article class="info-panel">
+        <span class="eyebrow">06 / TECHNOLOGY</span>
+        <h2>Tools and technologies</h2>
+        <div class="tech-list">
+          <span>Python</span><span>pandas</span><span>NumPy</span><span>scikit-learn</span>
+          <span>FastAPI</span><span>Pydantic</span><span>Joblib</span><span>HTML</span><span>CSS</span><span>JavaScript</span>
+        </div>
+      </article>
+
+      <article class="info-panel note-panel">
+        <span class="eyebrow">07 / IMPORTANT NOTE</span>
+        <h2>A prediction, not a promise.</h2>
+        <p>The output is an estimate based on patterns learned from the dataset. It should not be treated as a guaranteed exam result or as a measure of a student's ability. Predictions can be affected by dataset quality, model limitations and factors not represented in the inputs.</p>
+      </article>
+    </section>
+
+    <section class="about-cta section-wrap">
+      <h2>Curious about your own estimate?</h2>
+      <p>Head back to the predictor and give it a try.</p>
+      <a class="primary-button button-link" href="index.html#predictor">Try ScorePredict <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="index.html"><span class="brand-mark">S</span><span>Score<span class="brand-accent">Predict</span></span></a>
+    <p>Built to turn everyday study habits into a little insight.</p>
+    <span class="copyright">© <span id="year"></span> ScorePredict</span>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

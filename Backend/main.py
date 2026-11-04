@@ -4,9 +4,20 @@ from typing import Annotated, Literal
 import joblib
 import pandas as pd
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 model = joblib.load("student_exam_score_model.pkl")
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:5500"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+
 @app.get("/")
 def home():
     return {'Message':'Student exam score Prediction API is running!'}
