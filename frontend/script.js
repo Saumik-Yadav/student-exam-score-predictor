@@ -1,5 +1,3 @@
-// ScorePredict frontend behaviour.
-// The API URL is local for development. Change it to your deployed API URL before publishing.
 const API_URL = "https://scorepredict-api.onrender.com/predict";
 
 const form = document.getElementById("prediction-form");
@@ -10,7 +8,6 @@ const scoreElement = document.getElementById("predicted-score");
 const messageElement = document.getElementById("result-message");
 const tryAgainButton = document.getElementById("try-again");
 
-// Match the score to a short message. The score is rounded only for display.
 function getScoreMessage(score) {
   if (score >= 90) {
     return "Outstanding! Your predicted performance is excellent. Keep up the great work!";
@@ -35,15 +32,11 @@ function setStatus(message, isSuccess = false) {
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  // Browser validation checks required fields and the min/max values first.
   if (!form.reportValidity()) {
     return;
   }
 
-  // FormData reads the values using each field's name attribute.
   const formData = new FormData(form);
-
-  // Convert numeric inputs from strings into JavaScript numbers.
   const requestData = {
     age: Number(formData.get("age")),
     course: formData.get("course"),
@@ -70,7 +63,6 @@ form.addEventListener("submit", async (event) => {
       body: JSON.stringify(requestData)
     });
 
-    // Read the response body, including error details returned by FastAPI.
     const responseData = await response.json();
 
     if (!response.ok) {
@@ -87,7 +79,6 @@ form.addEventListener("submit", async (event) => {
       throw new Error("The API response did not contain a valid predicted_score.");
     }
 
-    // Keep the displayed result within the expected 0–100 score scale.
     const displayScore = Math.min(100, Math.max(0, score));
     scoreElement.textContent = displayScore.toFixed(1);
     messageElement.textContent = getScoreMessage(displayScore);
@@ -113,6 +104,4 @@ tryAgainButton.addEventListener("click", () => {
   resultCard.hidden = true;
   document.getElementById("predictor").scrollIntoView({ behavior: "smooth" });
 });
-
-// Set the current year in the footer.
 document.getElementById("year").textContent = new Date().getFullYear();
